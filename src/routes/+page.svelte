@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
     import { Card, Label, Select, Input, Fileupload, Button } from 'flowbite-svelte';
 
     let selected = "url";
