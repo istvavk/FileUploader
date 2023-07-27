@@ -5,8 +5,25 @@
     let jsonData = [
         {value:"url", name: "URL"},
         {value:"f", name: "FILE"},
-    ]
+    ];
+    let url;
+    let file;
 
+    function handleDelete () {
+        if(url){
+            url = '';
+        }
+    }
+    function handleSave () {
+        if(file){
+            console.log('File uploaded', file);
+            file = null;
+        }
+        if(url){
+            console.log('URL uploaded', url);
+            url = null;
+        }
+    }
 
 </script>
 
@@ -23,18 +40,23 @@
         </Label>
         {#if selected === "url"}
             <div class='mb-6'>
-                <Label for='default-input' class='block mb-2'>Default input</Label>
-                <Input id='default-input' placeholder="Paste URL" />
+                <Label for='default-input' class='block mb-2'>Url</Label>
+                <Input name="url" id='default-input' type="text" bind:value={url} placeholder="Paste URL" />
             </div>
         {:else}
             <div class="pb-5">
-                <Label class="pb-3" for='default_size' >Default size</Label>
-                <Fileupload class="pb-10" id="default_size" />
+                <Label class="pb-3" for='default_size' >File</Label>
+                <Fileupload type="file" bind:value={file} class="pb-10" id="default_size" />
             </div>
         {/if}
         <div class="flex justify-between pt-5">
-            <Button color="red">Delete</Button>
+            <Button color="red" on:click={() => handleDelete()}>Delete</Button>
             <Button color="red">Save</Button>
         </div>
     </Card>
 </div>
+
+
+
+
+```

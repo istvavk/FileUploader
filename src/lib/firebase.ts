@@ -1,18 +1,22 @@
-// src/lib/firebase.ts
-import { initializeApp } from 'firebase/app';
-import { getFirestore } from 'firebase/firestore';
+import { initializeApp } from "firebase/app";
+import { getStorage, ref } from "firebase/storage";
+import { getAnalytics } from "firebase/analytics";
+import { getFirestore } from "firebase/firestore";
+
 
 const firebaseConfig = {
-    apiKey: 'YOUR_API_KEY',
-    authDomain: 'YOUR_AUTH_DOMAIN',
-    projectId: 'YOUR_PROJECT_ID',
-    storageBucket: 'YOUR_STORAGE_BUCKET',
-    messagingSenderId: 'YOUR_MESSAGING_SENDER_ID',
-    appId: 'YOUR_APP_ID',
+    apiKey: "AIzaSyC59-nQjuvtEW3vcJh53u6Bwe783AckDBo",
+    authDomain: "fileuploader-6d261.firebaseapp.com",
+    databaseURL: "https://fileuploader-6d261-default-rtdb.firebaseio.com",
+    projectId: "fileuploader-6d261",
+    storageBucket: "fileuploader-6d261.appspot.com",
+    messagingSenderId: "351822759727",
+    appId: "1:351822759727:web:6ba5fb487b36f0ec4583da",
+    measurementId: "G-4SMBG5DQGX"
 };
 
 // Initialize Firebase
-const firebaseApp = initializeApp(firebaseConfig);
-
-// Get a Firestore instance
-export const db = getFirestore(firebaseApp);
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+const storage = getStorage(app);
+export const db = getFirestore(app);
