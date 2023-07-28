@@ -9,20 +9,26 @@
         {value:"f", name: "FILE"},
     ];
     let url;
-    let file;
+    let files;
+
 
     function handleDelete () {
-        if(url){
+        if (url) {
             url = '';
         }
     }
     async function handleSave () {
-        await db
-            .collection('urls')
-            .add({
-                url
-            });
-
+        if (selected === "url") {
+            await db
+                .collection('urls')
+                .add({
+                    url
+                });
+        } else {
+            await storage
+                .ref()
+                .child('files/' + files[0].name).put(files[0]);
+        }
     }
 
 </script>
@@ -46,7 +52,7 @@
         {:else}
             <div class="pb-5">
                 <Label class="pb-3" for='default_size' >File</Label>
-                <Fileupload type="file" bind:value={file} class="pb-10" id="default_size" />
+                <Fileupload type="file" bind:files={files} class="pb-10" id="default_size" />
             </div>
         {/if}
         <div class="flex justify-between pt-5">
