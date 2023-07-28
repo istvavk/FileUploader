@@ -1,5 +1,7 @@
 <script lang="ts">
     import { Card, Label, Select, Input, Fileupload, Button } from 'flowbite-svelte';
+    import { db } from '$lib/firebase';
+    import { storage } from '$lib/firebase';
 
     let selected = "url";
     let jsonData = [
@@ -14,15 +16,13 @@
             url = '';
         }
     }
-    function handleSave () {
-        if(file){
-            console.log('File uploaded', file);
-            file = null;
-        }
-        if(url){
-            console.log('URL uploaded', url);
-            url = null;
-        }
+    async function handleSave () {
+        await db
+            .collection('urls')
+            .add({
+                url
+            });
+
     }
 
 </script>
@@ -51,7 +51,7 @@
         {/if}
         <div class="flex justify-between pt-5">
             <Button color="red" on:click={() => handleDelete()}>Delete</Button>
-            <Button color="red">Save</Button>
+            <Button color="red" on:click={() => handleSave()}>Save</Button>
         </div>
     </Card>
 </div>
